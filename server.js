@@ -30,7 +30,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.post("/Signin", (req, res) => {
+app.post("/signin", (req, res) => {
   //const { email, password } = req.body;
   if (
     req.body.email === obj.users[0].email &&
