@@ -1,7 +1,7 @@
 const express = require("express");
 const db = require("./db/index");
 const cors = require("cors");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 const app = express();
