@@ -1,15 +1,27 @@
 const express = require("express");
 const db = require("./db/index");
 const cors = require("cors");
-const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("hello world");
+app.post("/billingform", (req, res) => {
+  const { name, email, address, contact, city, card } = req.body;
+  db("confirm")
+    .returning("*")
+    .insert({
+      name: name,
+      email: email,
+      address: address,
+      contact: contact,
+      city: city,
+      card: card,
+    })
+    .then(console.log);
+  res.json("Success");
 });
 
 app.post("/signup", (req, res) => {
@@ -167,7 +179,4 @@ app.get("/accessories/:id", (req, res) => {
     })
     .catch((err) => console.log(err));
 });
-app.listen(
-  "http://ec2-13-127-75-63.ap-south-1.compute.amazonaws.com:5000",
-  () => console.log("listening to port 5000")
-);
+app.listen(5000, () => console.log("listening to port 5000"));

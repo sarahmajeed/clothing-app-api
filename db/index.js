@@ -4,9 +4,9 @@ const pg = require("pg");
 const db = knex({
   client: "pg",
   connection: {
-    host: "127.0.0.1",
+    host: "clothing-db.cvtpb4cbgtac.ap-south-1.rds.amazonaws.com",
     user: "postgres",
-    password: "software",
+    password: "sarahsoftware13",
     database: "shoppingapp",
   },
 });
