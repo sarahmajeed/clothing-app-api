@@ -1,16 +1,12 @@
 const express = require("express");
 const db = require("./db/index");
 const cors = require("cors");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const app = express();
 app.use(express.json());
 app.use(cors());
-
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
 
 app.post("/signup", (req, res) => {
   const { name, email, password } = req.body;
