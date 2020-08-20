@@ -167,4 +167,7 @@ app.get("/accessories/:id", (req, res) => {
     })
     .catch((err) => console.log(err));
 });
-app.listen(5000, () => console.log("listening to port 5000"));
+app.listen(
+  "http://ec2-13-127-75-63.ap-south-1.compute.amazonaws.com:5000",
+  () => console.log("listening to port 5000")
+);
