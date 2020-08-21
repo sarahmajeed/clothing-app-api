@@ -34,32 +34,30 @@ app.post("/signup", (req, res) => {
       .catch(trx.rollback);
   });
 });
+
 app.post("/signin", (req, res) => {
   const { email, password } = req.body;
-
-  db("login")
-    .where({
-      email: email,
-    })
-    .select("email", "hash")
+  db.select("email", "hash")
+    .from("login")
+    .where("email", "=", email)
     .then((data) => {
-      const isValid = data[0].compareSync(password, data[0].hash);
+      const isValid = bcrypt.compareSync(password, data[0].hash);
+      console.log(isValid);
       if (isValid) {
         return db
           .select("*")
           .from("users")
-          .where({
-            email: email,
-          })
+          .where("email", "=", email)
           .then((user) => {
+            console.log(user);
             res.json(user[0]);
           })
-          .catch((err) => res.status(400).json("Unable to get user"));
+          .catch((err) => res.status(400).json("cant get user"));
       } else {
-        res.status(400).json("wrong credentials");
+        res.status(400).json("wrong password");
       }
     })
-    .catch((err) => res.status(400).json("wrong credentials"));
+    .catch((err) => res.status(400).json("wrong info"));
 });
 
 app.get("/women/kurtis", (req, res) => {

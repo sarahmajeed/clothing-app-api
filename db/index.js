@@ -1,15 +1,14 @@
-var knex = require('knex');
-const pg = require('pg');
+var knex = require("knex");
+const pg = require("pg");
 
 const db = knex({
-  client: 'pg',
+  client: "pg",
   connection: {
-    host: '127.0.0.1',
-    user: 'postgres',
-    password: 'software',
-    database: 'shoppingapp'
-  }
+    host: "clothing-db.cvtpb4cbgtac.ap-south-1.rds.amazonaws.com",
+    user: "postgres",
+    password: "sarahsoftware13",
+    database: "shoppingapp",
+  },
 });
-
 
 module.exports = db;
