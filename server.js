@@ -1,12 +1,28 @@
 const express = require("express");
 const db = require("./db/index");
 const cors = require("cors");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+app.post("/billingform", (req, res) => {
+  const { name, email, address, contact, city, card } = req.body;
+  db("confirm")
+    .returning("*")
+    .insert({
+      name: name,
+      email: email,
+      address: address,
+      contact: contact,
+      city: city,
+      card: card,
+    })
+    .then(console.log);
+  res.json("Success");
+});
 
 app.post("/signup", (req, res) => {
   const { name, email, password } = req.body;
