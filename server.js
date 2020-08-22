@@ -26,7 +26,7 @@ app.post("/billingform", (req, res) => {
 
 app.post("/signup", (req, res) => {
   const { name, email, password } = req.body;
-  const hash = bcrypt.hashSync(password, saltRounds);
+  const hash = bcrypt.hashSync(password);
   db.transaction((trx) => {
     trx
       .insert({
@@ -43,12 +43,14 @@ app.post("/signup", (req, res) => {
             name: name,
             joined: new Date(),
           })
-          .then((user) => res.json(user[0]))
-          .catch((err) => console.log(err.message));
+          .then((user) => {
+            res.json(user[0]);
+          });
       })
       .then(trx.commit)
       .catch(trx.rollback);
   });
+  console.log("done");
 });
 
 app.post("/signin", (req, res) => {
