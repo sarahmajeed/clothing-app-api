@@ -10,7 +10,7 @@ app.use(cors());
 
 app.post("/billingform", (req, res) => {
   const { name, email, address, contact, city, card } = req.body;
-  db("confirm")
+  db("billing")
     .returning("*")
     .insert({
       name: name,
