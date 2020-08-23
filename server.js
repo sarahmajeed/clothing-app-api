@@ -8,6 +8,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
+
 app.post("/billingform", (req, res) => {
   const { name, email, address, contact, city, card } = req.body;
   db("billing")
